@@ -1,6 +1,5 @@
 <?php if (!defined('APPLICATION')) exit();
 
-
 $PluginInfo['EditConversations'] = array(
    'Name' => 'Edit Conversations',
 	'Description'	=> 'Allows editing of unread conversation messages',
@@ -36,18 +35,22 @@ class EditConversationsPlugin extends Gdn_Plugin
          ->GroupBy('cm.MessageID');
    }
 
-   // add css read/unread css and edit button
+   // add read/unread css and edit button
    public function MessagesController_BeforeConversationMessageItem_Handler($Sender) {
       $Message = $Sender->EventArguments['Message'];
       if ($Message->DateLastViewed < $Message->DateInserted) {
          $Sender->EventArguments['Class'] .= ' MessageUnread ';
-         echo Wrap(Anchor(T('Edit'), '#', 'Button SmallButton EditMessage'))
+         echo Wrap(Anchor(T('Edit'), '#', 'Button SmallButton EditMessage')
             , 'li'
             , array('class' => 'EditMessageContainer')
          );
       } else {
          $Sender->EventArguments['Class'] .= ' MessageRead ';
       }
+   }
+
+   public function MessagesController_BeforeConversationMessageBody_Handler($Sender) {
+ 
    }
 
    public function MessagesController_Edit_Create($Sender) {
