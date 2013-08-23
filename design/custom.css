@@ -15,3 +15,7 @@ ul.MessageList li.MessageUnread {
 ul.MessageList li.MessageRead {
    border: 1px dashed #999;
 }
+
+.EditBox {
+   width: 99%;
+}
